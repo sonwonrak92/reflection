@@ -15,7 +15,7 @@ public class HomeController {
 	
 	@GetMapping("/main")
 	public String main(Model model) {
-		model.addAttribute( "items",service.findAllItems() );
+		//model.addAttribute( "items",service.findAllItems() );
 		
 		return "main";
 	}
