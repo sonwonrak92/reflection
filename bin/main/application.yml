@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/study_db?serverTimezone=UTC
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  security:
+   oauth2:
+    client:
+     registration:
+      # 페이스북 앱 정보
+       facebook:
+        client-id: 632874013791174
+        client-secret: 848d23b821ca84ed95d4bc7f5748d8ad
+
