@@ -229,7 +229,9 @@ function callFaceApi() {
 	    	
 	    }, // 요청 완료 시
 	    error: function(response) {}, // 요청 실패.
-	    complete: function(response) {} // 요청의 실패, 성공과 상관 없이 완료 될 경우 호출
+	    complete: function(response) {
+	    	callCelebApi();	//return celeName, celebRate
+	    } // 요청의 실패, 성공과 상관 없이 완료 될 경우 호출
 	});
 
 }
@@ -241,12 +243,16 @@ function callCelebApi() {
 	    type: 'GET', // GET, PUT	
 	    success: function(response) {
 	    	var celebData = JSON.parse(response);
-	    	celebName = celebData.faces[0].emotion.value;
-	    	celebRate = celebData.faces[0].age.value;
-	    	
+	    	celebName = celebData.faces[0].celebrity.value;
+	    	celebRate = celebData.faces[0].celebrity.confidence;
 	    }, // 요청 완료 시
 	    error: function(response) {}, // 요청 실패.
-	    complete: function(response) {} // 요청의 실패, 성공과 상관 없이 완료 될 경우 호출
+	    complete: function(response) {
+
+	   	 $("#analysisResult").text("축하드립니다. 당신은 "+celebName+"씨와 약 "+(celebRate*100)+"% 정도 일치하는 것 같습니다. \n"
+	   			 +"또한 예상 되는 나이는 "+age+"이며, 사진에 나타나는 감정은 "+emotionValue+"로 보여집니다.");
+
+	    } // 요청의 실패, 성공과 상관 없이 완료 될 경우 호출
 	});
 }
 
@@ -268,12 +274,7 @@ $("#imgReset").click(function() {
 });
 
 $("#btnAnalysis").click(function() {		
-	
  callFaceApi(); 	//return age, ageRate, emotionValue
- callCelebApi();	//return celeName, celebRate
- 
- $("#analysisResult").text("축하드립니다. 당신은 "+celebName+"씨와 약 "+(celebRate*100)+"% 정도 일치하는 것 같습니다. \n"
-		 +"또한 예상 되는 나이는 "+age+"이며, 사진에 나타나는 감정은 "+emotionValue+"로 보여집니다.");
  
 });
 
